@@ -28,7 +28,7 @@ let shopItemsData = [{
         desc: "Lorem ipsum dolor sit amet consectetur adipisicing."
     },
 ];
-
+let basket = []
 let generateShop = () => {
     return (shop.innerHTML = shopItemsData.map((x) => {
         let {
@@ -38,7 +38,7 @@ let generateShop = () => {
             desc,
             price
         } = x;
-        return ` <div class="item">
+        return ` <div id=product-id-${id } class="item">
         <img width="220" src=${img} alt="">
         <div class="details">
             <h2>${name}</h2>
@@ -46,9 +46,9 @@ let generateShop = () => {
             <div class="price-quantity">
                 <h2>$ ${price}</h2>
                 <div class="button">
-                    <i class="bi bi-dash-lg"></i>
-                    <div class="quantity">0</div>
-                    <i class="bi bi-plus-lg"></i>
+                    <i onclick=decreament(${id}) class="bi bi-dash-lg"></i>
+                    <div id=${id} class="quantity">0</div>
+                    <i onclick=increament(${id}) class="bi bi-plus-lg"></i>
                 </div>
             </div>
         </div>
@@ -56,3 +56,34 @@ let generateShop = () => {
     }).join(""));
 };
 generateShop();
+
+let increament = (id) => {
+    let selectedItem = id;
+    let search = basket.find((x) => x.id === selectedItem.id);
+    if (search === undefined) {
+        basket.push({
+            id: selectedItem.id,
+            item: 1,
+        });
+    } else {
+        search.item += 1;
+    }
+    console.log(basket)
+}
+let decreament = (id) => {
+    let selectedItem = id;
+    let search = basket.find((x) => x.id === selectedItem.id);
+    if (search === undefined) {
+        basket.push({
+            id: selectedItem.id,
+            item: 1,
+        });
+    } else {
+        search.item -= 1;
+    }
+    console.log(basket)
+
+}
+let update = () => {
+    console.log()
+}
